@@ -1,0 +1,25 @@
+{
+  "name": "webapp_njs_exp_btd",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KornTK/WebApp_NJS_Exp_BTD.git"
+  },
+  "author": "korntk",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KornTK/WebApp_NJS_Exp_BTD/issues"
+  },
+  "homepage": "https://github.com/KornTK/WebApp_NJS_Exp_BTD#readme",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "debug": "^4.3.4",
+    "express": "^4.18.1",
+    "morgan": "^1.10.0"
+  }
+}
