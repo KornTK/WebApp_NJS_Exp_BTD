@@ -1,138 +1,106 @@
-(function($){
-    
-    "use strict";
-    
-    //===== Prealoder
-    
-    $(window).on('load', function(event) {
-        $('.preloader').delay(500).fadeOut(500);
-    });
-    
-    
-    //===== Mobile Menu 
-    
-    $(".navbar-toggler").on('click', function() {
-        $(this).toggleClass('active');
-    });
-    
-    $(".navbar-nav a").on('click', function() {
-        $(".navbar-toggler").removeClass('active');
-    });
-    
-    
-    //===== close navbar-collapse when a  clicked
-    
-    $(".navbar-nav a").on('click', function () {
-        $(".navbar-collapse").removeClass("show");
-    });
-    
-    
-    //===== Sticky
-    
-    $(window).on('scroll', function(event) {    
-        var scroll = $(window).scrollTop();
-        if (scroll < 10) {
-            $(".navigation").removeClass("sticky");
-        } else{
-            $(".navigation").addClass("sticky");
-        }
-    });
-    
-    
-    //===== Section Menu Active
+(function () {
+  "use strict";
 
-    var scrollLink = $('.page-scroll');
-        // Active link switching
-        $(window).scroll(function() {
-        var scrollbarLocation = $(this).scrollTop();
+  // ======= Sticky
+  window.onscroll = function () {
+    const ud_header = document.querySelector(".ud-header");
+    const sticky = ud_header.offsetTop;
+    const logo = document.querySelector(".header-logo");
 
-        scrollLink.each(function() {
-
-          var sectionOffset = $(this.hash).offset().top - 73;
-
-          if ( sectionOffset <= scrollbarLocation ) {
-            $(this).parent().addClass('active');
-            $(this).parent().siblings().removeClass('active');
-          }
-        });
-    });
-    
-    
-    
-    // Parallaxmouse js
-    
-    function parallaxMouse() {
-        if ($('#parallax').length) {
-            var scene = document.getElementById('parallax');
-            var parallax = new Parallax(scene);
-        };
-    };
-    parallaxMouse();
-    
-    
-    //===== Progress Bar
-    
-    if($('.progress-line').length){
-        $('.progress-line').appear(function(){
-            var el = $(this);
-            var percent = el.data('width');
-            $(el).css('width',percent+'%');
-        },{accY: 0});
+    if (window.pageYOffset > sticky) {
+      ud_header.classList.add("sticky");
+    } else {
+      ud_header.classList.remove("sticky");
     }
-    
-    
-    //===== Counter Up
-    
-    $('.counter').counterUp({
-        delay: 10,
-        time: 1600,
-    });
-    
-    
-    //===== Magnific Popup
-    
-    $('.image-popup').magnificPopup({
-      type: 'image',
-      gallery:{
-        enabled:true
-      }
-    });
-    
-    
-    //===== Back to top
-    
-    // Show or hide the sticky footer button
-    $(window).on('scroll', function(event) {
-        if($(this).scrollTop() > 600){
-            $('.back-to-top').fadeIn(200)
-        } else{
-            $('.back-to-top').fadeOut(200)
-        }
-    });
-    
-    
-    //Animate the scroll to yop
-    $('.back-to-top').on('click', function(event) {
-        event.preventDefault();
-        
-        $('html, body').animate({
-            scrollTop: 0,
-        }, 1500);
-    });
-    
 
-    
-    //===== 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-}(jQuery));
+    // === logo change
+    if (ud_header.classList.contains("sticky")) {
+      logo.src = "assets/images/logo/logo.svg";
+    } else {
+      logo.src = "assets/images/logo/logo-white.svg";
+    }
+
+    // show or hide the back-top-top button
+    const backToTop = document.querySelector(".back-to-top");
+    if (
+      document.body.scrollTop > 50 ||
+      document.documentElement.scrollTop > 50
+    ) {
+      backToTop.style.display = "flex";
+    } else {
+      backToTop.style.display = "none";
+    }
+  };
+
+  // ===== responsive navbar
+  let navbarToggler = document.querySelector("#navbarToggler");
+  const navbarCollapse = document.querySelector("#navbarCollapse");
+
+  navbarToggler.addEventListener("click", () => {
+    navbarToggler.classList.toggle("navbarTogglerActive");
+    navbarCollapse.classList.toggle("hidden");
+  });
+
+  //===== close navbar-collapse when a  clicked
+  document
+    .querySelectorAll("#navbarCollapse ul li:not(.submenu-item) a")
+    .forEach((e) =>
+      e.addEventListener("click", () => {
+        navbarToggler.classList.remove("navbarTogglerActive");
+        navbarCollapse.classList.add("hidden");
+      })
+    );
+
+  // ===== Sub-menu
+  const submenuItems = document.querySelectorAll(".submenu-item");
+  submenuItems.forEach((el) => {
+    el.querySelector("a").addEventListener("click", () => {
+      el.querySelector(".submenu").classList.toggle("hidden");
+    });
+  });
+
+  // ===== Faq accordion
+  const faqs = document.querySelectorAll(".single-faq");
+  faqs.forEach((el) => {
+    el.querySelector(".faq-btn").addEventListener("click", () => {
+      el.querySelector(".icon").classList.toggle("rotate-180");
+      el.querySelector(".faq-content").classList.toggle("hidden");
+    });
+  });
+
+  // ===== wow js
+  new WOW().init();
+
+  // ====== scroll top js
+  function scrollTo(element, to = 0, duration = 500) {
+    const start = element.scrollTop;
+    const change = to - start;
+    const increment = 20;
+    let currentTime = 0;
+
+    const animateScroll = () => {
+      currentTime += increment;
+
+      const val = Math.easeInOutQuad(currentTime, start, change, duration);
+
+      element.scrollTop = val;
+
+      if (currentTime < duration) {
+        setTimeout(animateScroll, increment);
+      }
+    };
+
+    animateScroll();
+  }
+
+  Math.easeInOutQuad = function (t, b, c, d) {
+    t /= d / 2;
+    if (t < 1) return (c / 2) * t * t + b;
+    t--;
+    return (-c / 2) * (t * (t - 2) - 1) + b;
+  };
+
+  document.querySelector(".back-to-top").onclick = () => {
+    scrollTo(document.documentElement);
+  };
+})();
