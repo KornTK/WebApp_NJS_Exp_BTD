@@ -1,0 +1,26 @@
+[
+    {
+        "id": 0,
+        "productTitle": "น้ำยาล้างจาน",
+        "productDescription": "น้ำยาล้างจานสำหรับล้างจาน สูตร 1",
+        "productPrice": 40
+    },
+    {
+        "id": 1,
+        "productTitle": "น้ำยาล้างจาน 2",
+        "productDescription": "น้ำยาล้างจานสำหรับล้างจาน สูตร 2",
+        "productPrice": 65
+    },
+    {
+        "id": 2,
+        "productTitle": "น้ำยาล้างจาน 3",
+        "productDescription": "น้ำยาล้างจานสำหรับล้างจาน สูตร 3",
+        "productPrice": 35
+    },
+    {
+        "id": 3,
+        "productTitle": "น้ำยาล้างจาน 4",
+        "productDescription": "น้ำยาล้างจานสำหรับล้างจาน สูตร 4",
+        "productPrice": 55
+    }
+]

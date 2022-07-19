@@ -8,7 +8,9 @@ const debug = require('debug')('app');
 const morgan = require('morgan');
 //path is a package that allows us to work with paths
 const path = require('path');
-const productsRouter = express.Router();
+
+const productsRouter = require("./src/router/productsRouter");
+
 
 const app = express();
 //main port 3000 backup port is 4000
@@ -20,19 +22,15 @@ app.use(express.static(path.join(__dirname,"/public/")));
 app.set("views","./src/views");
 app.set("view engine","ejs")
 
-productsRouter.route('/').get((req,res)=>{
-    res.send("Hi I'm products ");
-});
 
-productsRouter.route('/1').get((req,res)=>{
-    res.send("Hi I'm products 1");
-});
 
 app.use("/products", productsRouter)
 
 app.get("/",(req,res)=>{
  
-    res.render("index",{username: 'KornTK', customers: ["Kitti","korn","kite"]})
+    res.render("index",{
+        username: 'KornTK', customers: ["Kitti","korn","kite"]
+    });
     
 })
 

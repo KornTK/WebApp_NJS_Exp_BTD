@@ -18,9 +18,7 @@
   <section id="features" class="ud-features">
     <div class="container">
       <br><br><br><br><br>
-      <h1>All Product</h1>
-      <!-- this is loop  -->
-      <% products.map((product)=>{ %>
+      <h1> Product Details</h1>\
 
         <h4> 
           <a href="/products/<%=product.id %>"><%=product.productTitle %>  </a>
@@ -28,7 +26,6 @@
         <p> <%= product.productDescription %> </p>
         <p>ราคา : <%= product.productPrice %> </p>
 
-        <%} ) %>
     </div>
   </section>
 
